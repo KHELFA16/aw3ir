@@ -1,0 +1,67 @@
+<!doctype html>
+<body> 
+    <h1 style="background-color:rgb(240, 255, 30);">fiche personne tp2 khelfa</h1>       
+   
+ 
+</body>
+<html>
+    <head>
+        <script type="text/javascript" src="formu.js"></script>
+            <link href="CSS.css" rel="stylesheet">
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>TP2 khelfa  </title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+        <style>
+          body{
+              background-color: #c2bdbd;              
+              font-family: system, -apple-system, ".SFNSText-Regular", "San Francisco", "Roboto", "Segoe UI", "Helvetica Neue", "Lucida Grande", sans-serif;
+              font-size: 16px;
+              margin: 0 auto;
+              max-width: 800px;              
+          }
+        </style>
+        
+    </head>
+    <body>  
+              
+        <h1>Saisie d'une fiche "Personne"</h1>
+        <legend><strong>ces champs sont obligatoire :</strong></legend>
+        <div style="background-color: #e9ebee"  > 
+        <form id="Formulaire" method=post   onsubmit="validation();return false;">
+        
+        <label for="nom" > Nom </label>
+        <input id="nom" type="text" name="nom"     ><br>
+        <label for="prenom" > Prénom </label>
+        <input id="prenom" type="text" name="prénom"    ><br>
+    
+        <label for="nom"  > Date de naissance  </label>
+        <input id="date" type="date" name="date" placeholder="JJ/MM/AAAA"  ><br>
+    
+        <label for="adresse"  > Adresse </label>
+        <input id="adresse" type="text" name="adresse"   ><br>
+    
+    
+        <label for="mail"  > E-mail </label>
+        <input id="mail" type="email" name="e-mail" maxlength="30" minlength="5" required ><br>
+    
+    
+    <p class="boutton" >
+        <input type="button" id="boutton" value="Valider" style="margin-left:200px; margin-block-end: 5px" onclick="validation()">
+    
+        <input type="reset" value="Reset" style="margin-left:50px; margin-block-end: 5px">
+    <input type="submit" value="Submit" style="margin-left:50px">
+    
+    
+    </form>
+</div>
+    
+    <div id="error" hidden>  </div> 
+    <div id="resultat" hidden>  </div>
+    </body>
+    
+</html
