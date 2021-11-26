@@ -1,33 +1,88 @@
-<!doctype html>
-<html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>TP3</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <script src="js/bootstrap.bundle.js"></script>
+    <script src="js/form-validation.js"></script>
+    <title>Document</title>
+</head>
+<style>
+  body{
+      background-image:url('IMG_0030.JPG') ;              
+      font-family: system, -apple-system, ".SFNSText-Regular", "San Francisco", "Roboto", "Segoe UI", "Helvetica Neue", "Lucida Grande", sans-serif;
+      font-size: 16px;
+      margin: 0 auto;
+      max-width: 800px;
+                    
+  }
+</style>
+<body>
+    <div class="container">
+        <form action="">
+          <div>
+            <h1><strong>TP AW</strong></h1>
+        </div>
+        <div>
+            <h5>Avec bootstrap</h5>
+        </div>
+            <div class="row mb-3">
+              <label for="colFormLabel" class="col-sm-4 col-form-label">Nom</label>
+              <div class="col-sm-6">
+              <input type="text" class="form-control" placeholder="NOM" id="Nom" >
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label for="colFormLabel" class="col-sm-4 col-form-label">Prenom</label>
+              <div class="col-sm-6">
+              <input type="text" class="form-control" placeholder="Prenom" id="Prenom" >
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label for="dob" class="col-sm-4 control-label">Date de naissance<span  class="datepicker-format"></span></label>
+                 <div class="col-sm-6">
+                 <input class="form-control" id="dob" name="dob" type="date" />    
+                 </div>
+              </div>
 
-        <link rel="apple-touch-icon" href="apple-touch-icon.png">
-        <!-- Place favicon.ico in the root directory -->
+              <div class="row mb-3">
+                <label for="colFormLabel" class="col-sm-4 col-form-label">Adresse</label>
+                <div class="col-sm-6">
+                <input type="text" class="form-control" placeholder="Adresse" id="address" >
+              </div>
+              </div>
 
-        <style>
-          body{
-              background-color: #e9ebee;              
-              font-family: system, -apple-system, ".SFNSText-Regular", "San Francisco", "Roboto", "Segoe UI", "Helvetica Neue", "Lucida Grande", sans-serif;
-              font-size: 16px;
-              margin: 0 auto;
-              max-width: 800px;              
-          }
-        </style>
-        
-        <!-- Code à dé-commenter si besoin de fichier CSS ou JS -->
-        <!--<link rel="stylesheet" href="style.css">-->
-        <!--<script src="main.js"></script>-->
-    </head>
-    <body>        
-        <h1>tp3</h1>
-        <!-- Add your site or application content here -->
-        <p>Hello world! This is HTML5 Boilerplate.</p>
-        <img src="../galilee.png" alt="Logo Galilee"/>
-    </body>
+              <div class="row mb-3">
+                <label for="inputEmail3" class="col-sm-4 col-form-label">Email</label>
+                <div class="col-sm-6">
+                <input type="email" class="form-control" id="ademail" placeholder="Adresse mail">
+                </div>
+              </div>
+            <br>
+            <button type="button" class="btn btn-primary" id="Submit">Submit</button>
+         
+        </form>
+    </div>
+    <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="first">
+              <p>...</p>
+            </div>
+
+            <a href="#" id="lien" target="blank"><img src="#" alt=""  width= "50%" id="map"></a>
+            
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+</body>
 </html>
