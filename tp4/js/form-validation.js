@@ -1,4 +1,9 @@
 window.onload = function () {
+  document.querySelector("#gps").addEventListener("click", function(event){
+    event.preventDefault();
+    getLocation();
+})
+
     document.querySelector("#Submit").addEventListener("click", function(event){
       event.preventDefault();
 
@@ -54,11 +59,36 @@ window.onload = function () {
         newdate = day + "/" + month + "/" + year;
         document.querySelector("#first").textContent = "Vous êtes né le "+ newdate +" et vous habitez ici: ";
 
-        document.querySelector("#map").src = `https://maps.googleapis.com/maps/api/staticmap?markers=${document.querySelector("#address").value}&zoom=7&size=400x300&scale=2&key=AIzaSyAkmvI9DazzG9p77IShsz_Di7-5Qn7zkcg`;
-        document.querySelector("#lien").href= `http://maps.google.com/maps?q=${document.querySelector("#address").value}`;
-        
+       
+        contactStore.add(document.querySelector("#Nom").value, document.querySelector("#Prenom").value, newdate, document.querySelector("#Address").value, document.querySelector("#ademail").value);
+        document.querySelector("tbody").innerHTML = "";
+        var listecontact = contactStore.getList();
+        for (var index in listecontact) {
+            document.querySelector("tbody").innerHTML =
+                document.querySelector("tbody").innerHTML +
+                                "<tr><td>" +
+                                listecontact[index].name +
+                                "</td><td>" +
+                                listecontact[index].firstname +
+                                "</td><td>" +
+                                listecontact[index].date +
+                                "</td><td> <a href= 'https://maps.googleapis.com/maps/api/staticmap?markers=${document.querySelector(" + listecontact[index].adress + ").value}&zoom=7&size=400x300&scale=2&key=AIzaSyAkmvI9DazzG9p77IShsz_Di7-5Qn7zkcg' target='_blank'>" +
+                                listecontact[index].adress +
+                                " </a> </td><td> <a href='mailto:'>"+
+                                listecontact[index].mail +
+                                "</a></td></tr>" ;
+        }
 
-        myModal.show();
+
+        document.querySelector("#Nom").value = "";
+        document.querySelector("#Prenom").value = "";
+        document.querySelector("#dob").value = "";
+        document.querySelector("#Address").value = "";
+        document.querySelector("#admail").value = "";
+        document.querySelector(`#Nom + span`).textContent = "";
+        document.querySelector(`#Prenom + span`).textContent = "";
+
+       
       }
 });
 }
@@ -66,4 +96,7 @@ window.onload = function () {
 function validateEmail(email) {
   const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   return re.test(String(email).toLowerCase());
+}
+function calcNbChar(id) {
+  document.querySelector(`#${id} + span`).textContent = document.querySelector(`#${id}`).value.length + " car.";
 }

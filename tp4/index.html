@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="css/bootstrap.css">
     <script src="js/bootstrap.bundle.js"></script>
     <script src="js/form-validation.js"></script>
+    <script src="js/gps.js"></script>
+    <script src="js/store.js"></script>
     <title>Document</title>
 </head>
 <style>
@@ -31,7 +33,7 @@
             <div class="row mb-3">
               <label for="colFormLabel" class="col-sm-4 col-form-label">Nom</label>
               <div class="col-sm-6">
-              <input type="text" class="form-control" placeholder="NOM" id="Nom"onkeypress="calcNbChar(this.id)" />
+              <input type="text" class="form-control" placeholder="NOM" id="Nom" onkeypress="calcNbChar(this.id)" />
               <span></span> <!-- balise mise à jour dynamiquement en JS -->
               </div>
             </div>
@@ -45,8 +47,8 @@
             <div class="row mb-3">
               <label for="dob" class="col-sm-4 control-label">Date de naissance<span  class="datepicker-format"></span></label>
                  <div class="col-sm-6">
-                 <input class="form-control" id="dob" name="dob" type="date" onkeypress="calcNbChar(this.id)" />
-                 <span></span> <!-- balise mise à jour dynamiquement en JS -->    
+                 <input class="form-control" id="dob" name="dob" type="date" />
+   
                  </div>
               </div>
 
@@ -55,13 +57,14 @@
                 <div class="col-sm-6">
                 <input type="text" class="form-control" placeholder="Adresse" id="address" >
               </div>
-              <div class="col-sm"><button type="button" class="btn btn-primary">GPS</button></div>
+              <div class="col-sm"><button type="button" id="gps" class="btn btn-primary">GPS</button></div>
+              <div id="map"></div>
               </div>
 
               <div class="row mb-3">
                 <label for="inputEmail3" class="col-sm-4 col-form-label">Email</label>
                 <div class="col-sm-6">
-                <input type="email" class="form-control" id="ademail" placeholder="Adresse mail"onkeypress="calcNbChar(this.id)" />
+                <input type="email" class="form-control" id="ademail" placeholder="Adresse mail" onkeypress="calcNbChar(this.id)" />
                 <span></span> <!-- balise mise à jour dynamiquement en JS -->
                 </div>
               </div>
@@ -81,13 +84,27 @@
               <p>...</p>
             </div>
 
-            <a href="#" id="lien" target="blank"><img src="#" alt=""  width= "50%" id="map"></a>
-            
+            <a href="#" id="lien" target="blank"><img src="#" alt=""  width= "50%" id="map"></a>     
             <div class="modal-footer">
               <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
             </div>
           </div>
         </div>
       </div>
+</body>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Nom</th>
+      <th scope="col">Prenom</th>
+      <th scope="col">Date de naissance</th>
+      <th scope="col">Adresse</th>
+      <th scope="col">Mail</th>
+    </tr>
+  </thead>
+  <tbody id="tbody">
+  </tbody>
+</table>
+</div>
 </body>
 </html>
