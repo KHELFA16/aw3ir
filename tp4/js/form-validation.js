@@ -1,102 +1,107 @@
-window.onload = function () {
-  document.querySelector("#gps").addEventListener("click", function(event){
-    event.preventDefault();
-    getLocation();
-})
 
-    document.querySelector("#Submit").addEventListener("click", function(event){
-      event.preventDefault();
+window.onload = function () {   // ce code est exécuter une fois que toute la page est téléchargée par le navigateur
+    // voir plus : https://www.w3schools.com/js/js_htmldom.asp
+    console.log("DOM ready!");
 
+    document.querySelector("form").addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        document.getElementById("error").innerHTML ="";
       
-      var name =document.querySelector("#Nom").value;
-      var name2 =document.querySelector("#Prenom").value;
-      var address =document.querySelector("#address").value;
-      var Email =document.querySelector("#ademail").value;
-      var myModal = new bootstrap.Modal(document.getElementById('myModal'));
-      var dateNaissance = new Date(document.getElementById("dob").value);
-      if(name == "" || name.length < 5){
-        document.querySelector(".modal-title").textContent = "Attention ";
-        document.querySelector(".modal-body").textContent = "le nom saisie doit avoir plus de 5 characteres ";
-        document.querySelector("#map").src = "#";
-        myModal.show();
-      }
-      else if(name2 == "" || name2.length < 5){
-        document.querySelector(".modal-title").textContent = "Attention ";
-        document.querySelector(".modal-body").textContent = "le preneom saisie doit avoir plus de 5 characteres";
-        document.querySelector("#map").src = "#";
-        myModal.show();
-      }
-      else if(document.getElementById("dob").value == ""){
-        document.querySelector(".modal-title").textContent = "Attention ";
-        document.querySelector(".modal-body").textContent = "veillez selectionner une date";
-        document.querySelector("#map").src = "#";
-        myModal.show();
-      }
-      else if (dateNaissance.getTime() > Date.now()){
-        document.querySelector(".modal-title").textContent = "Attention ";
-        document.querySelector(".modal-body").textContent = "la date ne doit pas etre dans le futur";
-        document.querySelector("#map").src = "#";
-        myModal.show();
-      }
-      else if(address == "" || address.length < 5 ){
-        document.querySelector(".modal-title").textContent = "Attention ";
-        document.querySelector(".modal-body").textContent = "l'adresse saisie doit avoir plus de 5 characteres";
-        document.querySelector("#map").src = "#";
-        myModal.show();
-      }
-      else if(Email == "" || Email.length < 5 || validateEmail(document.getElementById("ademail").value) == false ){
-        document.querySelector(".modal-title").textContent = "Attention erreur";
-        document.querySelector(".modal-body").textContent = "Veuillez saisir un email valide ";
-        document.querySelector("#map").src = "#";
-        myModal.show();
-       }
+        
+        var nom = document.getElementById("name").value;
+        var prenom = document.getElementById("firstname").value;
+        var Adresse = document.getElementById("adresse").value;
+        var mail = document.getElementById("mail").value;
+        let date = document.getElementById("birth").value;
+        var myModal = new bootstrap.Modal(document.getElementById('myModal'));
+      
+        var a=0;
+        
+        var i = 0;
+        let nowTimestamp = Date.now();
+        let time =Date.parse(date);
 
-      else{
-        document.querySelector(".modal-title").textContent = `Bienvenue ${document.querySelector("#Prenom").value} !` ;
-        var month = dateNaissance.getUTCMonth() + 1;
-        var day = dateNaissance.getUTCDate();
-        var year = dateNaissance.getUTCFullYear();
-        newdate = day + "/" + month + "/" + year;
-        document.querySelector("#first").textContent = "Vous êtes né le "+ newdate +" et vous habitez ici: ";
-
-       
-        contactStore.add(document.querySelector("#Nom").value, document.querySelector("#Prenom").value, newdate, document.querySelector("#Address").value, document.querySelector("#ademail").value);
-        document.querySelector("tbody").innerHTML = "";
-        var listecontact = contactStore.getList();
-        for (var index in listecontact) {
-            document.querySelector("tbody").innerHTML =
-                document.querySelector("tbody").innerHTML +
-                                "<tr><td>" +
-                                listecontact[index].name +
-                                "</td><td>" +
-                                listecontact[index].firstname +
-                                "</td><td>" +
-                                listecontact[index].date +
-                                "</td><td> <a href= 'https://maps.googleapis.com/maps/api/staticmap?markers=${document.querySelector(" + listecontact[index].adress + ").value}&zoom=7&size=400x300&scale=2&key=AIzaSyAkmvI9DazzG9p77IShsz_Di7-5Qn7zkcg' target='_blank'>" +
-                                listecontact[index].adress +
-                                " </a> </td><td> <a href='mailto:'>"+
-                                listecontact[index].mail +
-                                "</a></td></tr>" ;
+        const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        if (!nom.replace(/\s+/, '').length) {
+            document.getElementById("error").innerHTML += "La saisie du nom est obligatoire </br>";
+        } else if (nom.length > 30 || nom.length < 5) {
+            document.getElementById("error").innerHTML += "Le nom est incorrect </br>";
+        } else {
+            i = i + 1;
+        }
+        if (!prenom.replace(/\s+/, '').length) {
+            document.getElementById("error").innerHTML += "La saisie du prenom est obligatoire </br>";
+        } else if (prenom.length > 30 || prenom.length < 5) {
+            document.getElementById("error").innerHTML += "Le prenom est incorrect </br>";
+        } else {
+            i = i + 1;
+        }
+        if (!Adresse.replace(/\s+/, '').length) {
+            document.getElementById("error").innerHTML += "La saisie de l'Adresse est obligatoire </br>";
+        } else if (Adresse.length > 50 || Adresse.length < 5) {
+            document.getElementById("error").innerHTML += "L'Adresse est incorrect </br>";
+        } else {
+            i = i + 1;
         }
 
 
-        document.querySelector("#Nom").value = "";
-        document.querySelector("#Prenom").value = "";
-        document.querySelector("#dob").value = "";
-        document.querySelector("#Address").value = "";
-        document.querySelector("#admail").value = "";
-        document.querySelector(`#Nom + span`).textContent = "";
-        document.querySelector(`#Prenom + span`).textContent = "";
+        if (!re.test(String(mail).toLowerCase())) {
+            document.getElementById("error").innerHTML += "Email incorrect </br>";
 
+        } else {
+            i = i + 1;
+        }
+        if (!date.replace(/\s+/, '').length) {
+            document.getElementById("error").innerHTML += "Date incorrect </br>";
+        } else {
+            i = i + 1;
+        }
+
+        if (time > nowTimestamp) {
+            document.getElementById("error").innerHTML += "date dans le futur </br>";
+        }
+        else {
+            i = i + 1;
+        }
+        if (i == 6) {
+           
+            document.getElementById("error").innerHTML +=" merci";
+           
+           contactStore.add(nom, prenom, date, Adresse, mail);
+
+
+           document.querySelector("table tbody").innerHTML = document.querySelector("table tbody").innerHTML + 
+           '<tr><td>'+nom+'</td><td>'+prenom+'</td><td>'+date+'</td><td>'+Adresse+'</td><td>'+mail+'</td><td>';
+           
+
+
+           
+        }
+        
+
+        
+        console.log("form submitted!");
+        console.log();
        
-      }
-});
-}
+        
+        
+        
+    });
 
-function validateEmail(email) {
-  const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-  return re.test(String(email).toLowerCase());
-}
-function calcNbChar(id) {
-  document.querySelector(`#${id} + span`).textContent = document.querySelector(`#${id}`).value.length + " car.";
-}
+
+    $(document).ready(function(){
+        $("#name").keyup(function () {
+            var lengthCount = this.value.length;              
+            $('#span1').text(lengthCount+' car.');
+        });
+        $("#firstname").keyup(function () {
+            var lengthCount = this.value.length;              
+            $('#span2').text(lengthCount+' car.');
+        });
+    
+       
+    });
+
+};
+
